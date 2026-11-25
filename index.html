@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="golingo-pages" content="1"><title>歌邻国 · 一句一句，唱进心里</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6f4ed;color:#253c32;font-family:'Microsoft YaHei',sans-serif}button,input,select,textarea{font:inherit}button,.file{cursor:pointer;border:1px solid #b9c7b8;border-radius:12px;background:#fffdf7;color:#253c32;padding:13px 19px}button:hover,.file:hover{background:#e3eadb}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #995d22;outline-offset:3px}button:disabled{opacity:.45;cursor:default}.primary{background:#315c42;color:white;border-color:#315c42}.primary:hover{background:#244732}header{display:flex;justify-content:space-between;align-items:center;padding:24px 5vw;border-bottom:1px solid #d6ddce}header strong{font-size:24px}main{max-width:1120px;margin:45px auto;padding:0 24px;display:grid;grid-template-columns:270px 1fr;gap:48px}h1{font-family:Georgia,'Microsoft YaHei',serif;font-size:34px;margin:0 0 12px}p{line-height:1.8}.muted{color:#617163;font-size:14px}aside button{width:100%;text-align:left;margin-bottom:10px}aside .active{background:#dce8ce;border-color:#668557}.lesson{background:#fffdf7;padding:36px;border-radius:16px}.words{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin:48px 0 22px}.word{font-size:32px;padding:20px;min-width:112px}.word small{display:block;font-size:15px;margin-top:12px;color:#617163}.word.selected{background:#e5eedb;border-color:#5a8049}.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:24px 0}.meaning{text-align:center;color:#617163;min-height:28px}.footer{border-top:1px solid #d6ddce;padding-top:24px;margin-top:32px;display:flex;justify-content:space-between;gap:12px}.status{min-height:30px;color:#7c431e;line-height:1.7}details{margin:24px 0;border-top:1px solid #d6ddce;padding-top:20px}summary{cursor:pointer;font-weight:bold}textarea{width:100%;height:120px;margin-top:15px;padding:12px;border:1px solid #b9c7b8;border-radius:10px}label{display:inline-block;margin:8px 4px 8px 0}.file input{max-width:210px}audio{width:100%;margin-top:15px}progress{width:100%;accent-color:#4f7447;height:9px}#recording:empty{display:none}@media(max-width:740px){main{grid-template-columns:1fr;margin:24px auto;gap:20px}aside{display:flex;gap:10px;overflow:auto}aside button{min-width:170px}aside h2{display:none}.lesson{padding:24px 16px}.word{font-size:27px;padding:14px}h1{font-size:28px}header{padding:18px 24px}.words{margin-top:32px}}
+
+button[hidden]{display:none}input,select{max-width:100%}textarea{resize:vertical}audio{max-width:100%}
+
+.library{min-width:0}
+.library-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.library-heading h2{margin:0;font-size:19px}
+.library-heading button{width:auto;margin:0;padding:8px 12px;white-space:nowrap;font-size:14px}
+#songList{max-height:60vh;overflow:auto}
+.song-item strong,.song-item small{display:block;overflow-wrap:anywhere}
+.song-item small{margin-top:5px;color:#4c624f;font-size:13px}
+.song-item[aria-current="true"],#lessons .active{background:#dce8ce;border-color:#668557}
+#lessons{display:grid;gap:8px;max-height:40vh;overflow:auto;padding:12px 4px 4px}
+#lessons button{text-align:left;overflow-wrap:anywhere}
+.song-fields{display:flex;flex-wrap:wrap;gap:10px 18px}
+.song-fields label{display:grid;gap:6px;flex:1 1 190px}
+.song-fields input{border:1px solid #b9c7b8;border-radius:10px;padding:10px;min-width:0;background:#fffdf7;color:#253c32}
+#importStatus{min-height:0;margin:8px 0}
+#importStatus:empty{display:none}
+[hidden]{display:none!important}
+main>section{min-width:0}
+.lesson .words{gap:8px 4px;align-items:flex-start;margin:18px 0}
+.word-pair{max-width:100%;min-width:0}
+.word-pair>div{display:flex;flex-wrap:wrap;justify-content:center}
+.word-pair button{min-width:0;max-width:100%;border-color:transparent;background:transparent;border-radius:6px;overflow-wrap:anywhere}
+.word-pair .word{padding:4px 5px}
+.word-pair .reading{font-size:14px;line-height:1.3;min-height:32px;padding:5px;color:#4c624f}
+.word-pair button:hover,.word-pair button.selected{background:#e5eedb;border-color:#b9c7b8}
+.word-pair button.marked{text-decoration:underline dotted #875527;text-underline-offset:4px}
+.word-pair button.target{background:#f3e6ce;border-color:#b89d70}
+.word-tools,.review-entry{display:flex;align-items:center;justify-content:center;gap:8px 12px;flex-wrap:wrap}
+.word-tools p{margin:0;min-height:0;font-size:14px}
+.word-tools button,.review-entry button,.text-button{padding:7px 11px;font-size:14px}
+.review-entry{justify-content:flex-start;margin:0 0 14px}
+.review-entry:empty,.status:empty{display:none}
+.review-entry .muted{margin:0}
+#reviewHeader h2{font-size:20px;margin:0}
+#reviewHeader p{margin:4px 0 12px}
+.lesson .controls{margin:16px 0}
+.lesson details{margin:18px 0 0;padding-top:14px}
+.lesson details summary{font-size:14px;color:#4c624f}
+.lesson .footer{margin-top:20px;flex-wrap:wrap}
+.score-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;margin:14px 0}
+.score-inputs label{display:grid;gap:6px;margin:0;font-size:14px}
+.score-inputs input{width:100%;font-size:13px}
+.score-metrics{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 20px;margin:10px 0}
+.score-metrics strong{font-size:27px;color:#315c42}
+#scoreStatus:empty{display:none}
+#scorePanel canvas{width:100%;height:130px;display:block}
+.score-legend{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:13px;color:#4c624f}
+.score-key:before{display:inline-block;content:"";width:20px;margin:0 6px 3px 0;border-top:2px solid #315c42}
+.score-key.take:before{border-top:2px dashed #9b5325}
+.footer button{padding:10px 14px}
+@media(max-width:740px){
+  .library{display:block;overflow:visible}
+  .library-heading h2{display:block}
+  .library-heading button{min-width:0}
+  #songList{display:flex;gap:8px;padding:4px;overflow-x:auto}
+  #songList button{width:auto;min-width:145px;flex:none;margin-bottom:0}
+}
+</style>
+<header><strong>歌邻国</strong><span class="muted">一句一句，唱进心里</span></header>
+<main>
+<aside class="library" aria-labelledby="libraryTitle">
+  <div class="library-heading"><h2 id="libraryTitle">曲库</h2><button id="addSong" type="button">添加歌曲</button></div>
+  <nav id="songList" aria-label="已保存歌曲"></nav>
+</aside>
+<section aria-labelledby="songTitle">
+<h1 id="songTitle">歌邻国</h1><p id="songSubtitle" class="muted"></p><button id="completeSong" type="button" hidden>导入完整歌词</button>
+<progress id="progress" value="0" max="1" aria-label="整首练习进度"></progress><p id="count" class="muted"></p>
+<div class="review-entry" id="reviewEntry" hidden><button id="startReview"></button><span id="reviewDate" class="muted"></span></div>
+<div class="lesson">
+<div id="reviewHeader" hidden><h2 id="reviewHeading" tabindex="-1"></h2><p id="reviewPrompt" class="muted"></p></div>
+<div id="words" class="words" aria-label="本句歌词"></div>
+<div class="word-tools"><p id="meaning" class="meaning"></p><button id="markWord" hidden></button></div>
+<div class="controls">
+  <button id="speak" class="primary">听整句朗读</button><button id="record">录下我的跟读</button><button id="stop">停止</button>
+</div>
+<div id="recording"></div><p id="recordingLabel" class="muted"></p>
+<details id="scorePanel"><summary>跟读评分</summary>
+  <p id="scoreReference" class="muted"></p>
+  <p class="muted">录完本句会自动评分，也可选择已有录音。请使用 30 秒内的单人清声片段。录音在本机分析。</p>
+  <div class="score-inputs">
+    <label>我的录音<input id="takeFile" type="file" accept="audio/*,.webm,.m4a,.wav,.mp3"></label>
+    <label>本句清唱示范（可选）<input id="referenceFile" type="file" accept="audio/*,.webm,.m4a,.wav,.mp3"></label>
+  </div>
+  <audio id="referencePreview" controls hidden aria-label="本句清唱示范"></audio>
+  <button class="text-button" id="resetReference" hidden>改用粤语朗读</button>
+  <button class="text-button" id="scoreTake" disabled>重新评分</button>
+  <p class="muted" id="scoreStatus" role="status"></p>
+  <section id="scoreResult" aria-label="本句评分结果" hidden>
+    <div class="score-metrics"><span>声音相似度 <strong id="scoreTotal"></strong> / 100</span><span id="scorePitch"></span><span id="scoreRhythm"></span></div>
+    <div class="score-legend"><span>相对音高 · 半音</span><span><span class="score-key">示范</span>　<span class="score-key take">我的录音</span></span></div>
+    <canvas id="scorePlot" width="720" height="150" role="img" aria-label="示范与跟读的相对音高曲线，从句首到句尾"></canvas>
+    <p id="scoreTip"></p><p class="muted">按各自音域比较。音高占 60%，节奏占 40%。字词发音仍需回听核对。</p>
+  </section>
+</details>
+<div class="controls"><label><input id="roman" type="checkbox" checked> 显示粤拼</label></div>
+<details><summary>朗读设置与连读</summary><div class="controls">
+<label>跟读停顿 <select id="followPause"><option value="1">1 秒</option><option value="2" selected>2 秒</option><option value="4">4 秒</option><option value="6">6 秒</option></select></label>
+<label>朗读音色 <select id="voice">
+<option value="zh-HK-HiuMaanNeural">曉曼（女声）</option>
+<option value="zh-HK-HiuGaaiNeural">曉佳（女声）</option>
+<option value="zh-HK-WanLungNeural">雲龍（男声）</option>
+</select></label>
+<label>速度 <select id="rate"><option value="1">正常</option><option value="0.85">0.85 倍</option><option value="0.75">0.75 倍</option></select></label><label><input id="loop" type="checkbox"> 重复当前词句</label>
+<button id="startRead" class="text-button">从本句开始连读</button></div></details>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<div class="footer" id="lessonFooter"><button id="prev">上一句</button><button id="done" class="primary">这句唱顺了</button><button id="next">下一句</button></div>
+<div class="footer" id="reviewFooter" hidden><button id="leaveReview">返回练歌</button><button id="again">还不熟</button><button id="remembered" class="primary">记住了</button></div>
+</div><details id="lyricDirectory"><summary id="directoryLabel">歌词目录</summary><button id="difficult" style="margin-top:12px">整句加入待练</button><nav id="lessons" aria-label="本歌曲的歌词"></nav></details>
+<details id="lyricsTools"><summary>歌词与朗读</summary>
+<div class="song-fields">
+  <label>歌名 <input id="importTitle" placeholder="自动识别或手动填写" maxlength="120"></label>
+  <label>歌手 <input id="importArtist" placeholder="选填" maxlength="120"></label>
+</div><p class="muted">选择歌词文件，或粘贴每行一句的文本。也可以粘贴歌词来源返回的完整 JSON。 <a id="lyricsSource" target="_blank" rel="noopener noreferrer" hidden></a></p><label class="file">导入歌词文件 <input id="lyricsFile" type="file" accept=".lrc,.txt,.json,text/plain,application/json"></label><textarea id="lyrics" placeholder="粘贴 LRC、纯文本或同步歌词 JSON" aria-label="歌词内容"></textarea><button class="primary" id="import">添加到曲库</button>
+<p class="status" id="importStatus" role="status"></p>
+<p class="muted">导入时会自动分词和生成粤拼。可用空格调整本句词块，再保存。</p><input id="segments" aria-label="本句分词" style="width:100%;padding:12px"><button id="saveSegments" style="margin-top:10px">保存分词并注音</button><p class="muted">自动粤拼可在这里校对。每行对应一个词块。</p><textarea id="pronunciations" aria-label="本句粤拼校对"></textarea><button id="savePronunciations">保存粤拼</button><p class="muted">粤拼修改影响显示。朗读由独立语音引擎生成，仍需听辨核对。</p><button id="prepare">准备全课朗读</button><button id="cancelPrepare" hidden>停止准备</button><p id="prepareStatus" class="muted" role="status"></p><p class="muted">曲库提供预制粤语朗读。其他词句在浏览器里用合成音色朗读。跟读录音只在当前页面中保留。</p></details></section></main>
+<script type="module" src="app.js?v=10"></script></html>

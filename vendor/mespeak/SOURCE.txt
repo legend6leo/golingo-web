@@ -1,0 +1,6 @@
+meSpeak by Norbert Landsteiner, based on speak.js and eSpeak. GNU GPL.
+https://www.masswerk.at/mespeak/
+https://github.com/mikolalysenko/mespeak
+This directory distributes unmodified files from mespeak 2.0.2.
+Package source: https://registry.npmjs.org/mespeak/-/mespeak-2.0.2.tgz
+Engine source: https://github.com/kripken/speak.js
